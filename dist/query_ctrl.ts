@@ -15,16 +15,7 @@ export interface QueryMeta {
   sql: string;
 }
 
-const defaultQuery = `#standardSQL
-SELECT
-  origin, effective_connection_type, form_factor, first_paint
-FROM \`chrome-ux-report.all.201711\`
-WHERE
-  origin = 'https://www.trivago.com' AND
-  effective_connection_type.name = '4G' AND
-  form_factor.name = 'desktop'
-  randomString
-;`;
+const defaultQuery = "SELECT * FROM `ds-logging.sms.ds_logging_20180727` LIMIT 1000;";
 
 export class BigQueryQueryCtrl extends QueryCtrl {
   static templateUrl = 'partials/query.editor.html';

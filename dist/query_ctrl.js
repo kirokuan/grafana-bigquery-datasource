@@ -13,7 +13,7 @@ System.register(['app/plugins/sdk'], function(exports_1) {
                 sdk_1 = sdk_1_1;
             }],
         execute: function() {
-            defaultQuery = "#standardSQL\nSELECT\n  origin, effective_connection_type, form_factor, first_paint\nFROM `chrome-ux-report.all.201711`\nWHERE\n  origin = 'https://www.trivago.com' AND\n  effective_connection_type.name = '4G' AND\n  form_factor.name = 'desktop'\n  randomString\n;";
+            defaultQuery = "SELECT * FROM `ds-logging.sms.ds_logging_20180727` LIMIT 1000;";
             BigQueryQueryCtrl = (function (_super) {
                 __extends(BigQueryQueryCtrl, _super);
                 /** @ngInject **/

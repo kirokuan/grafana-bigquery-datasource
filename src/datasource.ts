@@ -74,6 +74,8 @@ export default class BigQueryDatasource {
         url: 'https://www.googleapis.com/bigquery/v2/projects/'+this.project+'/queries',
         authToken: this.authToken,
         query: queries[0].rawSql,
+      }).then((response)=>{
+        this.responseParser.parse([queries[0].rawSql],response.rows);
       });
       /*
       return this.backendSrv

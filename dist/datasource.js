@@ -77,6 +77,8 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                         url: 'https://www.googleapis.com/bigquery/v2/projects/' + this.project + '/queries',
                         authToken: this.authToken,
                         query: queries[0].rawSql,
+                    }).then(function (response) {
+                        _this.responseParser.parse([queries[0].rawSql], response.rows);
                     });
                     /*
                     return this.backendSrv
