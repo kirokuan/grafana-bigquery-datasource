@@ -9,13 +9,14 @@ export default class BigQueryDatasource {
   url: string;
   authToken: string;
   responseParser: ResponseParser;
-
+  project: string;
   /** @ngInject */
   constructor(instanceSettings, private backendSrv, private templateSrv, private $q) {
     this.id = instanceSettings.id;
     this.name = instanceSettings.name;
     this.url = 'https://www.googleapis.com/bigquery/v2/projects/'+instanceSettings.jsonData.project+'/datasets/';
     this.authToken = instanceSettings.jsonData.authToken;
+    this.project = instanceSettings.jsonData.project;
     this.responseParser = new ResponseParser(this.$q);
   }
 
@@ -28,14 +29,14 @@ export default class BigQueryDatasource {
   }
 
   doQueryRequest(options) {
-    options.url = this.url;
+    options.url = options.url || this.url;
     options.headers = {
       Authorization: "Bearer " + this.authToken,
     };
     options.method = 'POST';
     options.data = {
       useLegacySql: false,
-      query: this.query,
+      query:  options.query,
     }
     return this.backendSrv.datasourceRequest(options);
   }
@@ -49,6 +50,7 @@ export default class BigQueryDatasource {
       if (response.status === 200) {
         return { status: "success", message: "Data source is working", title: "Success" };
       } else {
+        console.log(response);
         return { status: "error", message: "Data source hates you", title: "TODO proper error message" };
       }
     });
@@ -69,7 +71,7 @@ export default class BigQueryDatasource {
         return this.$q.when({ data: [] });
       }
       return this.doQueryRequest({
-        url: 'https://www.googleapis.com/bigquery/v2/projects/trv-hs-hackathon-2018-test/queries',
+        url: 'https://www.googleapis.com/bigquery/v2/projects/'+this.project+'/queries',
         authToken: this.authToken,
         query: queries.rawSql,
       });

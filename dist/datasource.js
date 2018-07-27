@@ -21,6 +21,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                     this.name = instanceSettings.name;
                     this.url = 'https://www.googleapis.com/bigquery/v2/projects/' + instanceSettings.jsonData.project + '/datasets/';
                     this.authToken = instanceSettings.jsonData.authToken;
+                    this.project = instanceSettings.jsonData.project;
                     this.responseParser = new response_parser_1.default(this.$q);
                 }
                 BigQueryDatasource.prototype.doRequest = function (options) {
@@ -31,14 +32,14 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                     return this.backendSrv.datasourceRequest(options);
                 };
                 BigQueryDatasource.prototype.doQueryRequest = function (options) {
-                    options.url = this.url;
+                    options.url = options.url || this.url;
                     options.headers = {
                         Authorization: "Bearer " + this.authToken,
                     };
                     options.method = 'POST';
                     options.data = {
                         useLegacySql: false,
-                        query: this.query,
+                        query: options.query,
                     };
                     return this.backendSrv.datasourceRequest(options);
                 };
@@ -52,6 +53,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                             return { status: "success", message: "Data source is working", title: "Success" };
                         }
                         else {
+                            console.log(response);
                             return { status: "error", message: "Data source hates you", title: "TODO proper error message" };
                         }
                     });
@@ -71,7 +73,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                         return this.$q.when({ data: [] });
                     }
                     return this.doQueryRequest({
-                        url: 'https://www.googleapis.com/bigquery/v2/projects/trv-hs-hackathon-2018-test/queries',
+                        url: 'https://www.googleapis.com/bigquery/v2/projects/' + this.project + '/queries',
                         authToken: this.authToken,
                         query: queries.rawSql,
                     });

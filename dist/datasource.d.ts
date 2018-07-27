@@ -9,6 +9,7 @@ export default class BigQueryDatasource {
     url: string;
     authToken: string;
     responseParser: ResponseParser;
+    project: string;
     /** @ngInject */
     constructor(instanceSettings: any, backendSrv: any, templateSrv: any, $q: any);
     doRequest(options: any): any;
