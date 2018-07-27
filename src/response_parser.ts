@@ -1,7 +1,9 @@
 import _ from 'lodash';
 
 export default class ResponseParser {
+  constructor (q){
 
+  }
   parse(query, results) {
     /*
     if (!results || results.results.length === 0) { return []; }
@@ -50,3 +52,4 @@ function addUnique(arr, value) {
   arr[value] = value;
 }
 */
+}

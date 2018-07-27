@@ -8,6 +8,7 @@ System.register([], function(exports_1) {
                 /** @ngInject */
                 function BigQueryConfigCtrl($scope) {
                     this.current.jsonData.authToken = this.current.jsonData.authToken;
+                    this.current.jsonData.project = this.current.jsonData.project;
                 }
                 BigQueryConfigCtrl.templateUrl = 'partials/config.html';
                 return BigQueryConfigCtrl;

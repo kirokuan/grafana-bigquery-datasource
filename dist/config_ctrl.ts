@@ -7,5 +7,6 @@ export class BigQueryConfigCtrl {
   /** @ngInject */
   constructor($scope) {
     this.current.jsonData.authToken = this.current.jsonData.authToken;
+    this.current.jsonData.project = this.current.jsonData.project;
   }
 }

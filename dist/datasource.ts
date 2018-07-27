@@ -14,7 +14,7 @@ export default class BigQueryDatasource {
   constructor(instanceSettings, private backendSrv, private templateSrv, private $q) {
     this.id = instanceSettings.id;
     this.name = instanceSettings.name;
-    this.url = 'https://www.googleapis.com/bigquery/v2/projects/chrome-ux-report/datasets/';
+    this.url = 'https://www.googleapis.com/bigquery/v2/projects/'+instanceSettings.jsonData.project+'/datasets/';
     this.authToken = instanceSettings.jsonData.authToken;
     this.responseParser = new ResponseParser(this.$q);
   }
@@ -49,7 +49,7 @@ export default class BigQueryDatasource {
       if (response.status === 200) {
         return { status: "success", message: "Data source is working", title: "Success" };
       } else {
-        return { status: "error", message: "Data source hates you", title: "I want to die" };
+        return { status: "error", message: "Data source hates you", title: "TODO proper error message" };
       }
     });
   }
