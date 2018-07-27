@@ -54,7 +54,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                         }
                         else {
                             console.log(response);
-                            return { status: "error", message: "Data source hates you", title: "TODO proper error message" };
+                            return { status: "error", message: response.data.error.message, title: "TODO proper error message" };
                         }
                     });
                 };
@@ -69,13 +69,14 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                             rawSql: item.rawSql.replace("\n", " "),
                         };
                     });
+                    console.log(queries);
                     if (queries.length === 0) {
                         return this.$q.when({ data: [] });
                     }
                     return this.doQueryRequest({
                         url: 'https://www.googleapis.com/bigquery/v2/projects/' + this.project + '/queries',
                         authToken: this.authToken,
-                        query: queries.rawSql,
+                        query: queries[0].rawSql,
                     });
                     /*
                     return this.backendSrv
