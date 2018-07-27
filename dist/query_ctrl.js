@@ -1,17 +1,14 @@
 ///<reference path="../node_modules/grafana-sdk-mocks/app/headers/common.d.ts" />
-System.register(['lodash', 'app/plugins/sdk'], function(exports_1) {
+System.register(['app/plugins/sdk'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    var lodash_1, sdk_1;
+    var sdk_1;
     var defaultQuery, BigQueryQueryCtrl;
     return {
         setters:[
-            function (lodash_1_1) {
-                lodash_1 = lodash_1_1;
-            },
             function (sdk_1_1) {
                 sdk_1 = sdk_1_1;
             }],
@@ -41,10 +38,10 @@ System.register(['lodash', 'app/plugins/sdk'], function(exports_1) {
                 BigQueryQueryCtrl.prototype.onDataReceived = function (dataList) {
                     this.lastQueryMeta = null;
                     this.lastQueryError = null;
-                    var anySeriesFromQuery = lodash_1.default.find(dataList, { refId: this.target.refId });
-                    if (anySeriesFromQuery) {
-                        this.lastQueryMeta = anySeriesFromQuery.meta;
-                    }
+                    // let anySeriesFromQuery = _.find(dataList, { refId: this.target.refId });
+                    // if (anySeriesFromQuery) {
+                    //   this.lastQueryMeta = anySeriesFromQuery.meta;
+                    //  }
                 };
                 BigQueryQueryCtrl.prototype.onDataError = function (err) {
                     if (err.data && err.data.results) {

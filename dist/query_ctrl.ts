@@ -62,10 +62,10 @@ export class BigQueryQueryCtrl extends QueryCtrl {
     this.lastQueryMeta = null;
     this.lastQueryError = null;
 
-    let anySeriesFromQuery = _.find(dataList, { refId: this.target.refId });
-    if (anySeriesFromQuery) {
-      this.lastQueryMeta = anySeriesFromQuery.meta;
-    }
+   // let anySeriesFromQuery = _.find(dataList, { refId: this.target.refId });
+   // if (anySeriesFromQuery) {
+   //   this.lastQueryMeta = anySeriesFromQuery.meta;
+   //  }
   }
 
   onDataError(err) {
