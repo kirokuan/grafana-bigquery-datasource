@@ -13,7 +13,7 @@ export declare class BigQueryQueryCtrl extends QueryCtrl {
     static templateUrl: string;
     showLastQuerySQL: boolean;
     formats: any[];
-    query: BigQuery;
+    query: any;
     lastQueryMeta: QueryMeta;
     lastQueryError: string;
     showHelp: boolean;
