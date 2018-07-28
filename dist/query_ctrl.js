@@ -20,7 +20,9 @@ System.register(['app/plugins/sdk'], function(exports_1) {
                 function BigQueryQueryCtrl($scope, $injector) {
                     _super.call(this, $scope, $injector);
                     this.target.format = this.target.format || 'time_series';
-                    this.query = {};
+                    this.query = {
+                        target: this.target.refId
+                    };
                     this.query.alias = '';
                     this.formats = [{ text: 'Time series', value: 'time_series' }, { text: 'Table', value: 'table' }];
                     if (!this.query.rawSql) {

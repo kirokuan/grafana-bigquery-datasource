@@ -33,7 +33,9 @@ export class BigQueryQueryCtrl extends QueryCtrl {
     super($scope, $injector);
 
     this.target.format = this.target.format || 'time_series';
-    this.query= {};
+    this.query= {
+      target: this.target.refId
+    };
     this.query.alias = '';
     this.formats = [{ text: 'Time series', value: 'time_series' }, { text: 'Table', value: 'table' }];
     
