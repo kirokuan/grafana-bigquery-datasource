@@ -78,7 +78,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                         authToken: this.authToken,
                         query: queries[0].rawSql,
                     }).then(function (response) {
-                        return _this.responseParser.parse([queries[0].rawSql], response.data);
+                        return _this.responseParser.parse(queries[0], response.data);
                     });
                     /*
                     return this.backendSrv

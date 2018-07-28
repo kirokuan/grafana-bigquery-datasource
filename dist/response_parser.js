@@ -168,7 +168,7 @@ System.register([], function(exports_1) {
                       return { text: value};
                     });
                   }
-                  */
+                  */ console.log(query);
                     var schema = results.schema.fields;
                     var rows = results.rows;
                     var data_points = rows.map(function (r) {
@@ -176,7 +176,7 @@ System.register([], function(exports_1) {
                         var v = 0, t = 0;
                         a.forEach(function (e, i) {
                             if (schema[i].name == 't') {
-                                t = noExponents(e.v) * 1000;
+                                t = Math.round(noExponents(e.v) * 1000);
                             }
                             if (schema[i].name == 'm') {
                                 v = parseInt(e.v);
@@ -199,7 +199,7 @@ System.register([], function(exports_1) {
                             ]
                         }
                     ];
-                    return [{ target: "test", datapoints: data_points }];
+                    return [{ target: query.refId, datapoints: data_points }];
                 };
                 return ResponseParser;
             })();

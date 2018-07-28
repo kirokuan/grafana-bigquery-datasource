@@ -165,7 +165,7 @@ export default class ResponseParser {
       return { text: value};
     });
   }
-  */
+  */console.log(query);
     const schema = results.schema.fields;
     const rows = results.rows;
     var data_points = rows.map(r => {
@@ -173,7 +173,7 @@ export default class ResponseParser {
       let v = 0, t = 0;
       a.forEach((e, i) => {
         if (schema[i].name == 't') {
-          t = noExponents(e.v) * 1000;
+          t = Math.round(noExponents(e.v) * 1000);
         }
         if (schema[i].name == 'm') {
           v = parseInt(e.v);
@@ -196,7 +196,7 @@ export default class ResponseParser {
       ]
     }
     ];
-    return [{target:"test", datapoints: data_points}];
+    return [{target:query.refId, datapoints: data_points}];
   }
 
   /*
