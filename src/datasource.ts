@@ -75,7 +75,7 @@ export default class BigQueryDatasource {
         authToken: this.authToken,
         query: queries[0].rawSql,
       }).then((response)=>{
-        this.responseParser.parse([queries[0].rawSql],response.rows);
+         return this.responseParser.parse([queries[0].rawSql],response.data);
       });
       /*
       return this.backendSrv
