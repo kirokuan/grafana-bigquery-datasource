@@ -6,8 +6,7 @@
   "info": {
     "description": "BigQuery Data Source for Grafana",
     "author": {
-      "name": "Trivago",
-      "url": "https://trivago.com"
+      "name": "kirokaun"
     },
     "keywords": ["BigQuery"],
     "logos": {

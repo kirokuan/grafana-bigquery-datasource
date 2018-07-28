@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 import ResponseParser from './response_parser';
-
+// import GoogleAuth = require('google-auth-library');
 export default class BigQueryDatasource {
   id: any;
   name: string;

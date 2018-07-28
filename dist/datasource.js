@@ -11,6 +11,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                 response_parser_1 = response_parser_1_1;
             }],
         execute: function() {
+            // import GoogleAuth = require('google-auth-library');
             BigQueryDatasource = (function () {
                 /** @ngInject */
                 function BigQueryDatasource(instanceSettings, backendSrv, templateSrv, $q) {
