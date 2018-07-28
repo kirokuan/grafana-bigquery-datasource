@@ -65,6 +65,7 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                     }).map(function (item) {
                         return {
                             target: _this.templateSrv.replace(item.target, options.scopedVars, 'regex'),
+                            format: item.format,
                             refId: item.refId,
                             datasourceId: _this.id,
                             rawSql: item.rawSql.replace("\n", " "),
@@ -79,6 +80,9 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                         authToken: this.authToken,
                         query: queries[0].rawSql,
                     }).then(function (response) {
+                        if (queries[0].format == "table") {
+                            return _this.responseParser.parseTable(queries[0], response.data);
+                        }
                         return _this.responseParser.parse(queries[0], response.data);
                     });
                     /*

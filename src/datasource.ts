@@ -14,7 +14,7 @@ export default class BigQueryDatasource {
   constructor(instanceSettings, private backendSrv, private templateSrv, private $q) {
     this.id = instanceSettings.id;
     this.name = instanceSettings.name;
-    this.url = 'https://www.googleapis.com/bigquery/v2/projects/'+instanceSettings.jsonData.project+'/datasets/';
+    this.url = 'https://www.googleapis.com/bigquery/v2/projects/' + instanceSettings.jsonData.project + '/datasets/';
     this.authToken = instanceSettings.jsonData.authToken;
     this.project = instanceSettings.jsonData.project;
     this.responseParser = new ResponseParser(this.$q);
@@ -36,7 +36,7 @@ export default class BigQueryDatasource {
     options.method = 'POST';
     options.data = {
       useLegacySql: false,
-      query:  options.query,
+      query: options.query,
     }
     return this.backendSrv.datasourceRequest(options);
   }
@@ -57,41 +57,43 @@ export default class BigQueryDatasource {
   }
 
   query(options) {
-      var queries = _.filter(options.targets, item => {
-        return item.hide !== true;
-      }).map(item => {
-        return {
-          target: this.templateSrv.replace(item.target, options.scopedVars, 'regex'),
-          refId: item.refId,
-          datasourceId: this.id,
-          rawSql: item.rawSql.replace("\n", " "),
-        };
-      });
-      console.log(options);
-      if (queries.length === 0) {
-        return this.$q.when({ data: [] });
-      }
-      return this.doQueryRequest({
-        url: 'https://www.googleapis.com/bigquery/v2/projects/'+this.project+'/queries',
-        authToken: this.authToken,
-        query: queries[0].rawSql,
-      }).then((response)=>{
-         return this.responseParser.parse(queries[0],response.data);
-      });
-      /*
-      return this.backendSrv
-        .datasourceRequest({
-          //remove hardcoded project later and use variable from configCtrl
-          url: 'https://www.googleapis.com/bigquery/v2/projects/trv-hs-hackathon-2018-test/queries',
-          method: 'POST',
-          data: {
-            from: options.range.from.valueOf().toString(),
-            to: options.range.to.valueOf().toString(),
-            //query: queries.rawSql,
-            useLegacySql: false,
-          },
-        })
-        .then(this.responseParser.processQueryResult);*/
+    var queries = _.filter(options.targets, item => {
+      return item.hide !== true;
+    }).map(item => {
+      return {
+        target: this.templateSrv.replace(item.target, options.scopedVars, 'regex'),
+        format: item.format,
+        refId: item.refId,
+        datasourceId: this.id,
+        rawSql: item.rawSql.replace("\n", " "),
+      };
+    });
+    console.log(options);
+    if (queries.length === 0) {
+      return this.$q.when({ data: [] });
+    }
+    return this.doQueryRequest({
+      url: 'https://www.googleapis.com/bigquery/v2/projects/' + this.project + '/queries',
+      authToken: this.authToken,
+      query: queries[0].rawSql,
+    }).then((response) => {
+      if (queries[0].format == "table") { return this.responseParser.parseTable(queries[0], response.data); }
+      return this.responseParser.parse(queries[0], response.data);
+    });
+    /*
+    return this.backendSrv
+      .datasourceRequest({
+        //remove hardcoded project later and use variable from configCtrl
+        url: 'https://www.googleapis.com/bigquery/v2/projects/trv-hs-hackathon-2018-test/queries',
+        method: 'POST',
+        data: {
+          from: options.range.from.valueOf().toString(),
+          to: options.range.to.valueOf().toString(),
+          //query: queries.rawSql,
+          useLegacySql: false,
+        },
+      })
+      .then(this.responseParser.processQueryResult);*/
   }
 
   annotationQuery(options) {

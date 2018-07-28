@@ -141,6 +141,24 @@ export default class ResponseParser {
   constructor(q) {
 
   }
+  parseTable(query, results): any {
+    const schema = results.schema.fields;
+    const column = schema.map((f) => {
+      return { text: f.name, type: f.type }
+    });
+    const rowData = results.rows.map(r => {
+      return r.f.map((e) => {
+        return e.v;
+      })
+    });
+    return { data:[
+      {
+        "columns": column,
+        "rows": rowData,
+        "type": "table"
+      }
+    ]};
+  }
   parse(query, results) {
     /*
     if (!results || results.results.length === 0) { return []; }
@@ -180,7 +198,7 @@ export default class ResponseParser {
         }
       });
       return [v, t]
-    })
+    });
     const sample_response = [{
       "target": "upper_75",
       "datapoints": [
@@ -196,7 +214,7 @@ export default class ResponseParser {
       ]
     }
     ];
-    return [{target:query.target, datapoints: data_points}];
+    return {data:[{ target: query.target, datapoints: data_points }]};
   }
 
   /*

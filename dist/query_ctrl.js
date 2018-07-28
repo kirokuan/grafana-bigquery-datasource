@@ -13,7 +13,7 @@ System.register(['app/plugins/sdk'], function(exports_1) {
                 sdk_1 = sdk_1_1;
             }],
         execute: function() {
-            defaultQuery = "SELECT * FROM `ds-logging.sms.ds_logging_20180727` LIMIT 1000;";
+            defaultQuery = "SELECT * FROM `ds-logging.sms.ds_logging_20180727` LIMIT 10;";
             BigQueryQueryCtrl = (function (_super) {
                 __extends(BigQueryQueryCtrl, _super);
                 /** @ngInject **/
@@ -23,7 +23,7 @@ System.register(['app/plugins/sdk'], function(exports_1) {
                     this.query = {
                         target: this.target.refId
                     };
-                    this.query.alias = '';
+                    this.query.alias = this.target.refId;
                     this.formats = [{ text: 'Time series', value: 'time_series' }, { text: 'Table', value: 'table' }];
                     if (!this.query.rawSql) {
                         // special handling when in table panel

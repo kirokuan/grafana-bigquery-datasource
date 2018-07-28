@@ -15,7 +15,7 @@ export interface QueryMeta {
   sql: string;
 }
 
-const defaultQuery = "SELECT * FROM `ds-logging.sms.ds_logging_20180727` LIMIT 1000;";
+const defaultQuery = "SELECT * FROM `ds-logging.sms.ds_logging_20180727` LIMIT 10;";
 
 export class BigQueryQueryCtrl extends QueryCtrl {
   static templateUrl = 'partials/query.editor.html';
@@ -36,7 +36,7 @@ export class BigQueryQueryCtrl extends QueryCtrl {
     this.query= {
       target: this.target.refId
     };
-    this.query.alias = '';
+    this.query.alias = this.target.refId;
     this.formats = [{ text: 'Time series', value: 'time_series' }, { text: 'Table', value: 'table' }];
     
     if (!this.query.rawSql) {

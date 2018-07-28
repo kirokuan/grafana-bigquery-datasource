@@ -144,6 +144,24 @@ System.register([], function(exports_1) {
             ResponseParser = (function () {
                 function ResponseParser(q) {
                 }
+                ResponseParser.prototype.parseTable = function (query, results) {
+                    var schema = results.schema.fields;
+                    var column = schema.map(function (f) {
+                        return { text: f.name, type: f.type };
+                    });
+                    var rowData = results.rows.map(function (r) {
+                        return r.f.map(function (e) {
+                            return e.v;
+                        });
+                    });
+                    return { data: [
+                            {
+                                "columns": column,
+                                "rows": rowData,
+                                "type": "table"
+                            }
+                        ] };
+                };
                 ResponseParser.prototype.parse = function (query, results) {
                     /*
                     if (!results || results.results.length === 0) { return []; }
@@ -199,7 +217,7 @@ System.register([], function(exports_1) {
                             ]
                         }
                     ];
-                    return [{ target: query.target, datapoints: data_points }];
+                    return { data: [{ target: query.target, datapoints: data_points }] };
                 };
                 return ResponseParser;
             })();
