@@ -173,10 +173,10 @@ export default class ResponseParser {
       let v = 0, t = 0;
       a.forEach((e, i) => {
         if (schema[i].name == 't') {
-          t = noExponents(i.v) * 1000;
+          t = noExponents(e.v) * 1000;
         }
         if (schema[i].name == 'm') {
-          v = parseInt(i.v);
+          v = parseInt(e.v);
         }
       });
       return [v, t]
