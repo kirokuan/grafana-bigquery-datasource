@@ -32,14 +32,14 @@ export class BigQueryQueryCtrl extends QueryCtrl {
   constructor($scope, $injector) {
     super($scope, $injector);
 
-    this.query.format = this.query.format || 'time_series';
+    this.target.format = this.target.format || 'time_series';
     this.query.alias = '';
     this.formats = [{ text: 'Time series', value: 'time_series' }, { text: 'Table', value: 'table' }];
     
     if (!this.query.rawSql) {
       // special handling when in table panel
       if (this.panelCtrl.panel.type === 'table') {
-        this.query.format = 'table';
+        this.target.format = 'table';
         this.query.rawSql = 'SELECT 1';
       } else {
         this.query.rawSql = defaultQuery;
