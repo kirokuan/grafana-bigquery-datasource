@@ -196,7 +196,7 @@ export default class ResponseParser {
       ]
     }
     ];
-    return [{target:"test", data_points: data_points}];
+    return [{target:"test", datapoints: data_points}];
   }
 
   /*
