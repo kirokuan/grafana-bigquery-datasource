@@ -64,12 +64,13 @@ System.register(['lodash', './response_parser'], function(exports_1) {
                         return item.hide !== true;
                     }).map(function (item) {
                         return {
+                            target: _this.templateSrv.replace(item.target, options.scopedVars, 'regex'),
                             refId: item.refId,
                             datasourceId: _this.id,
                             rawSql: item.rawSql.replace("\n", " "),
                         };
                     });
-                    console.log(queries);
+                    console.log(options);
                     if (queries.length === 0) {
                         return this.$q.when({ data: [] });
                     }

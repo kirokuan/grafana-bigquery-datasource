@@ -199,7 +199,7 @@ System.register([], function(exports_1) {
                             ]
                         }
                     ];
-                    return [{ target: query.refId, datapoints: data_points }];
+                    return [{ target: query.target, datapoints: data_points }];
                 };
                 return ResponseParser;
             })();

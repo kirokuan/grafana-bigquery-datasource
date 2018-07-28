@@ -196,7 +196,7 @@ export default class ResponseParser {
       ]
     }
     ];
-    return [{target:query.refId, datapoints: data_points}];
+    return [{target:query.target, datapoints: data_points}];
   }
 
   /*

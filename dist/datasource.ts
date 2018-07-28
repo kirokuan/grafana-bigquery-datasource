@@ -61,12 +61,13 @@ export default class BigQueryDatasource {
         return item.hide !== true;
       }).map(item => {
         return {
+          target: this.templateSrv.replace(item.target, options.scopedVars, 'regex'),
           refId: item.refId,
           datasourceId: this.id,
           rawSql: item.rawSql.replace("\n", " "),
         };
       });
-      console.log(queries);
+      console.log(options);
       if (queries.length === 0) {
         return this.$q.when({ data: [] });
       }
